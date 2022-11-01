@@ -16,6 +16,7 @@ class Game {
     this.lossElement.textContent = 0;
   }
 
+
   registerEvents() {
     /*
       TODO:
@@ -24,6 +25,7 @@ class Game {
       В случае правильного ввода слова вызываем this.success()
       При неправильном вводе символа - this.fail();
      */
+    document.addEventListener('keydown', (e) => this.currentSymbol.textContent.toUpperCase() === e.key.toUpperCase() ? this.success() : this.fail());
   }
 
   success() {
