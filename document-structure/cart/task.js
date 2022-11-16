@@ -3,7 +3,7 @@ const productCart = document.querySelector('.cart__products');
 
 products.forEach(function (element, index) {
     const productCounter = element.querySelector('.product__quantity-value');
-    element.querySelector('.product__quantity-control_dec').addEventListener('click', () => Number(productCounter.textContent) > 0 ?  productCounter.textContent =
+    element.querySelector('.product__quantity-control_dec').addEventListener('click', () => Number(productCounter.textContent) > 1 ?  productCounter.textContent =
         String( Number(productCounter.textContent) - 1) : console.log('product in null yet') );
     element.querySelector('.product__quantity-control_inc').addEventListener('click', () => productCounter.textContent =
         String( Number(productCounter.textContent) + 1) );
