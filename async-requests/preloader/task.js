@@ -14,9 +14,7 @@ xhr.onreadystatechange = function() {
                 '<div class="item__value">' + data[key]["Value"] +
                 '</div><div class="item__currency">руб.</div></div>');
         }
-
-
-
     }
+
 };
 
