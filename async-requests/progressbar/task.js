@@ -5,8 +5,7 @@ sendForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const xhr = new XMLHttpRequest();
     xhr.upload.onprogress = function(event) {
-            progress.value = event.loaded / event.total;
-            console.log(`Отправлено ${event.loaded} из ${event.total}`);
+        progress.value = event.loaded / event.total;
         };
 
         xhr.onloadend = function() {

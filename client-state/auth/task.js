@@ -1,16 +1,35 @@
-const signIn = document.getElementById('signin');
 const signInBtn = document.getElementById('signin__btn');
+const signIn = document.getElementById('signin');
 const welcome = document.getElementById('welcome');
+const sendForm = document.getElementById('signin__form');
 const xhr = new XMLHttpRequest();
 
-signInBtn.addEventListener('click', () => {
-    let login = signIn.querySelector('.control[name="login"]').value;
-    let password = signIn.querySelector('.control[name="password"]').value;
-    xhr.open('get', 'https://netology-slow-rest.herokuapp.com/auth.php?login=' + login + '&password=' + password, true);
-    xhr.onload = () => {
-        if(xhr.status == 200){
-            welcome.classList.add('welcome_active');
+if(localStorage.userData){
+    signIn.classList.remove('signin_active');
+    welcome.textContent += localStorage.userData;
+    welcome.classList.add('welcome_active');
+}
+
+signInBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    xhr.open('POST', 'https://netology-slow-rest.herokuapp.com/auth.php', true);
+
+    xhr.onloadend = () => {
+        if(xhr.readyState===4) {
+            let data = JSON.parse(xhr.responseText);
+            if (data['success']){
+                localStorage.userData = data['user_id'];
+                signIn.classList.remove('signin_active');
+                welcome.textContent += data['user_id'];
+                welcome.classList.add('welcome_active');
+            }else{
+                alert('Неверный логин/пароль');
+            }
+
+
         }
-    }
-    xhr.send();
+    };
+
+    const formData = new FormData(sendForm);
+    xhr.send(formData);
 });
